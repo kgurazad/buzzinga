@@ -1,14 +1,9 @@
-$ = require('jquery')
-const newGame = function () {
-    alert('making a new game! right?');
-    global.mainWindow.loadFile('newGame.html')
-    global.mainWindow.once('ready-to-show', function () {
-	win.show();
-    });
+var $ = require('jquery');
+var {remote} = require('electron');
+var newGame = function () {
+    remote.getCurrentWindow().loadURL('file://'+__dirname+'/newGame.html');
 }
-const calcBuzzPoints = function (tu, wordID) {
-}
-$(global.document).ready(function () {
+$(document).ready(function () {
     $('#reset').on('click', function () {
 	alert('resetting buzzer!');
     });
@@ -33,4 +28,5 @@ $(global.document).ready(function () {
 	alert(newtu);
 	$('#tuarea').html(newtu);
     });
+    alert('yay!');
 });

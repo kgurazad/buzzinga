@@ -6,15 +6,7 @@
   </head>
   <body>
     <script>
-      global.document = document;
-      var cp = require('child_process');
-      var renderer = cp.spawn('node', ['renderer.js']);
-      renderer.stdout.on('data', function (data) {
-	  process.stdout.write(String(data) + '\n');
-      });
-      renderer.stderr.on('data', function (data) {
-	  process.stderr.write(String(data) + '\n');
-      });
+      require('./index-renderer.js');
     </script>
     <div class="input-group section" id="tubox">
       <div class="form-control" id="tuarea"></div>
