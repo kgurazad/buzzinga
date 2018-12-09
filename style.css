@@ -1,0 +1,13 @@
+.section {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+#tubox,#tuarea {
+    height: auto;
+}
+.bottom-div {
+    float: bottom;
+}

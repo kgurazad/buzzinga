@@ -1,0 +1,27 @@
+{
+  "name": "buzzinga",
+  "version": "1.0.0",
+  "description": "a simple lan buzzer software",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^3.0.8",
+    "express": "^4.16.4",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm start",
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/kgurazad/buzzinga"
+  },
+  "keywords": [
+    "quizbowl",
+    "lan",
+    "websocket"
+  ],
+  "author": "Karan Gurazada",
+  "license": "ISC"
+}
