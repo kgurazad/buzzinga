@@ -4,6 +4,15 @@ input, #login-div > button {
 #login-div > * {
     margin: 5%;
 }
+#buzzer-light {
+    position: fixed;
+    top: 15%;
+    bottom: 75%;
+    left: 45%;
+    right: 45%;
+    width: 10%;
+    height: 10%;
+}
 #buzz {
     position: fixed;
     top: 30%;

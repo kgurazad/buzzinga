@@ -2,6 +2,7 @@ var $ = require('jquery');
 var fs = require('fs');
 var ews = require('express-ws');
 var {remote} = require('electron');
+var {BrowserWindow} = remote;
 var addr;
 var express = require('express');
 var app = express();
@@ -12,31 +13,29 @@ var queue = []; // who is buzzing
 app.use(express.urlencoded());
 app.use(express.json());
 function newGame () {
-    var config = String(fs.readFileSync('./buzzinga.conf')).split('\n');
-    var team = "";
     $('#team-list').empty();
-    for (var line of config) {
-	if (line.charAt(line.length - 1) === ":") { // team
-	    team = line.substring(0, line.length - 1);
-	    players[team] = [];
-	} else {
-	    players[team].push(line);
-	}
-    }
-    for (var team in players) {
-	var cteam = team.replace(/ /g, '');
-	$('#team-list').append('<tr id="' + cteam + '"><td class="table-secondary">' + team + '</td></tr>');
-	for (var player of players[team]) {
-	    var cplayer = player.replace(/ /g, '');
-	    $('tr#' + cteam).append('<td class="table-danger" id="' + cplayer + '">' + player + '</td>'); 
-	}
-    }
+    var win2 = new BrowserWindow({width: 800, height: 600});
+    win2.loadFile('create-teams.html');
+    win2.on('close', function () {
+        console.log('asdfghjkl');
+        players = remote.getGlobal('opsVariables').players;
+        console.log(players);
+        for (var team in players) {
+	    var cteam = team.replace(/ /g, '');
+	    $('#team-list').append('<tr id="' + cteam + '"><td class="table-secondary">' + team + '</td></tr>');
+	    for (var player of players[team]) {
+	        var cplayer = player.replace(/ /g, '');
+	        $('tr#' + cteam).append('<td class="table-danger" id="' + cplayer + '">' + player + '</td>'); 
+	    }
+        }
+    });
 }
 function reset () {
     for (ws of queue) {
 	$('td#' + ws.name).removeClass('table-success');
         $('td#' + ws.name).empty();
 	$('td#' + ws.name).text(ws.fullName);
+        ws.send(JSON.stringify({content: 'reset'}));
     }
     queue = [];
 }
@@ -78,6 +77,7 @@ $(document).ready(function () {
 			    message: 'buzz by ' + this.fullName,
 			    sound: true
 			});
+                        this.send(JSON.stringify({content: 'buzz'}));
 		    }
 		}
 	    } catch (e) {

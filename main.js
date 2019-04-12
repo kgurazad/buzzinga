@@ -9,17 +9,14 @@ function createWindow () {
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600})
     
+    global.opsVariables = {players: null};
+
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')
     
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
     // Emitted when the window is closed.
-    
-    // allow for important variables and stuff
-    global.opsVariables = {};
-    global.opsVariables.teams = {team1: {name: null, players: null}, team2: {name: null, players: null}};
-    // well this actually went unused but w/e
     
     mainWindow.on('closed', function () {
 	// Dereference the window object, usually you would store windows
