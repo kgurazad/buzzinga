@@ -1,27 +1,62 @@
 {
-  "name": "buzzinga",
-  "version": "1.0.0",
-  "description": "a simple lan buzzer software",
-  "main": "main.js",
-  "dependencies": {
-    "electron": "^3.0.8",
-    "express": "^4.16.4",
-    "jquery": "^3.3.1"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "test": "npm start",
-    "start": "electron ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "github.com/kgurazad/buzzinga"
-  },
-  "keywords": [
-    "quizbowl",
-    "lan",
-    "websocket"
-  ],
-  "author": "Karan Gurazada",
-  "license": "ISC"
+			"name": "buzzinga",
+			"version": "1.0.0",
+			"description": "a simple lan buzzer software",
+			"main": "main.js",
+			"build": {
+						"appId": "buzzinga",
+						"dmg": {
+									"contents": [
+												{
+															"x": 110,
+															"y": 150
+												},
+												{
+															"x": 240,
+															"y": 150,
+															"type": "link",
+															"path": "/Applications"
+												}
+									]
+						},
+						"linux": {
+									"target": [
+												"AppImage",
+												"deb"
+									]
+						},
+						"win": {
+									"target": "squirrel",
+									"icon": "build/icon.ico"
+						}
+			},
+			"dependencies": {
+						"ajv": "^6.10.0",
+						"express": "^4.16.4",
+						"express-ws": "^4.0.0",
+						"jquery": "^3.3.1",
+						"node-notifier": "^5.4.0",
+						"npm": "^6.9.0"
+			},
+			"devDependencies": {
+						"electron": "^3.0.8",
+						"electron-builder": "^20.39.0"
+			},
+			"scripts": {
+						"test": "npm start",
+						"start": "electron .",
+						"pack": "build --dir",
+						"dist": "build"
+			},
+			"repository": {
+						"type": "git",
+						"url": "github.com/kgurazad/buzzinga"
+			},
+			"keywords": [
+						"quizbowl",
+						"lan",
+						"websocket"
+			],
+			"author": "Karan Gurazada",
+			"license": "ISC"
 }

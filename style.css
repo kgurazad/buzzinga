@@ -1,3 +1,6 @@
+body {
+    height: 100vw;
+}
 .section {
     width: 90%;
     margin-left: 5%;
@@ -11,3 +14,4 @@
 .bottom-div {
     float: bottom;
 }
+
