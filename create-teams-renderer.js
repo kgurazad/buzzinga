@@ -36,7 +36,7 @@ $(document).ready(function () {
         for (var i = 1; i <= numTeams; i++) {
             var name = $('#name' + i).val().trim();
             var thesePlayers = $('#players' + i).val().trim().split(/,\s*/g);
-            if (!thesePlayers.length === 0) {
+            if (thesePlayers.length !== 0) {
                 players[name] = thesePlayers;
             } 
         }
