@@ -72,6 +72,14 @@ $(document).ready(function () {
 		    this.name = msg.name.replace(/ /g, '');
 		    this.fullName = msg.name;
 		    this.team = msg.team;
+		    if (Object.keys(players).indexOf(msg.team) === -1) {
+			this.send(JSON.stringify({content: 'login-fail'}));
+			this.close();
+		    }
+		    if (players[this.team].indexOf(msg.fullName) === -1) {
+			this.send(JSON.stringify({content: 'login-fail'}));
+			this.close();
+		    }
 		    $('td#' + this.name).removeClass('table-danger');
 		} else if (msg.content === 'buzz') {
 		    $('td#' + this.name).addClass('table-success');
@@ -79,6 +87,7 @@ $(document).ready(function () {
 		    $('td#' + this.name).append(' <b>[' + queue.length + ']</b>');
 		    if (queue.length === 1) {
 			notifier.notify({
+			    appName: 'buzzinga',
 			    title: 'buzzinga',
 			    message: 'buzz by ' + this.fullName,
 			    sound: true
@@ -87,6 +96,7 @@ $(document).ready(function () {
 		    }
 		}
 	    } catch (e) {
+		console.error(e);
 		return;
 	    }
 	});

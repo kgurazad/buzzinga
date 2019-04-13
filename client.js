@@ -21,7 +21,10 @@ $(document).ready(function () {
                         clearInterval(buzzerLightInterval);
                     }
                     $('#buzzer-light').hide();
-                }
+                } else if (msg.content === 'login-fail') {
+		    alert('The credentials you presented are not the credentials of a player in the current match. Reloading the page...');
+		    window.location.reload();
+		}
             } catch (e) {}
         });
 	setInterval(function () {
