@@ -1,12 +1,17 @@
 var $ = require(`jquery`);
 var {remote} = require(`electron`);
-var {BrowserWindow} = remote;
+var dialogs = require('dialogs')();
 var numTeams = 1;
 
 $(document).ready(function () {
+    $('body').keyup(function () {
+        if (event.which === 73 && document.activeElement.tagName === 'BODY') {
+            remote.getCurrentWindow().toggleDevTools();
+        }
+    });
     $(`#add-team`).on(`click`, function () {
         numTeams++;
-        $(`#buttons`).before(`<div class="section define-team">
+        $(`#buttons`).before(`<div class="section" id="define-team` + numTeams + `">
             <div class="input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Team ` + numTeams + ` Name</span>
@@ -21,12 +26,17 @@ $(document).ready(function () {
             </div>
         </div>`);
     });
+    $('#del-team').on('click', function () {
+        dialogs.prompt('Which number team would you like to delete?', numTeams, function (resp) {
+            $('#define-team' + resp.trim()).remove();
+        });
+    });
     $('#start').on('click', function () {
         var players = {};
         for (var i = 1; i <= numTeams; i++) {
             var name = $('#name' + i).val().trim();
             var thesePlayers = $('#players' + i).val().trim().split(/,\s*/g);
-            if (thesePlayers.length === 0) {
+            if (!thesePlayers.length === 0) {
                 players[name] = thesePlayers;
             } 
         }

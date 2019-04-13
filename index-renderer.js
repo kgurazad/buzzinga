@@ -47,6 +47,11 @@ $(document).ready(function () {
     $('#game').on('click', function () {
 	newGame();
     })
+    $('body').keyup(function () {
+        if (event.which === 73 && document.activeElement.tagName === 'BODY') {
+            remote.getCurrentWindow().toggleDevTools();
+        }
+    });
     app.get('/', function (req, res) {
 	res.sendFile(__dirname+'/client.html')
     });
