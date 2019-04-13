@@ -3,6 +3,7 @@ var fs = require('fs');
 var ews = require('express-ws');
 var {remote} = require('electron');
 var {BrowserWindow} = remote;
+var ip = require('ip');
 var addr;
 var express = require('express');
 var app = express();
@@ -89,10 +90,8 @@ $(document).ready(function () {
 	    $('td#' + this.name).addClass('table-danger');
 	});
     });
-    require('dns').lookup(require('os').hostname(), function (error, address, f) {
-	addr = address;
-	$('#ip').html('Address: <code>' + addr + ':22126</code>');
-	app.listen(22126);
-    });
+    addr = ip.address();
+    $('#ip').html('Address: <code>' + addr + ':22126</code>');
+    app.listen(22126);
     newGame();
 });
