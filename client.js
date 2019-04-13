@@ -5,7 +5,6 @@ $(document).ready(function () {
     console.log("up!");
     window.ws = null;
     $('#join').click(function () {
-	alert("joining!");
 	window.ws = new WebSocket(window.location.href.replace('http', 'ws'));
 	window.ws.addEventListener('open', function () {
 	    this.send(JSON.stringify({name: $('#name').val(), team: $('#team').val()}));
@@ -32,7 +31,6 @@ $(document).ready(function () {
 	$('#buzz-div').show();
     });
     $('#buzz').click(function () {
-	alert("buzzing!");
 	window.ws.send(JSON.stringify({content: 'buzz'}));
     });
 });

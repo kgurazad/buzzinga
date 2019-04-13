@@ -27,9 +27,8 @@ $(document).ready(function () {
             var name = $('#name' + i).val().trim();
             var thesePlayers = $('#players' + i).val().trim().split(/,\s*/g);
             if (thesePlayers.length === 0) {
-                continue;
+                players[name] = thesePlayers;
             } 
-            players[name] = thesePlayers;
         }
         console.log(players);
         remote.getGlobal('opsVariables').players = players;
